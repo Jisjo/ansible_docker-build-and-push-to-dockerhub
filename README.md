@@ -124,7 +124,7 @@ It will login to docker hub and build the image. After bulding the image will pu
         - "{{ git_status.after }}"
 ```
 > Here git repo commited id used as image tag in docker hub
-
+---
 ## Result
 The docker hub will look like below after pushing image.
 ![image](https://github.com/Jisjo/ansible_docker-build-and-push-to-dockerhub/blob/main/Diagram-ansible-2.png)
