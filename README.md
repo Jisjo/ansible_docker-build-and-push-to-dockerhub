@@ -4,8 +4,8 @@
 
 ----
 ## Description
-Here I'm automating docker image creating using ansible. we will be installing docker and building a docker image for an Flask application.
-Also, the image built will be pushed to DockerHub using ansible playbook.
+Here I'm automating docker image creating using ansible. we will be installing docker and building a docker image for a Flask application.
+Also, the image built will be pushed to DockerHub using ansible-playbook.
 
 
 ----
@@ -14,15 +14,25 @@ Also, the image built will be pushed to DockerHub using ansible playbook.
 
 ![Images](https://github.com/Jisjo/ansible_docker-build-and-push-to-dockerhub/blob/main/Diagram-ansible-1.png)
 
+> #### Step 1
+> Ansible will connect to the build server. All dockerization operations will run on this server.
+
+
+>  #### Step 2
+>  To build the container pushing the Docker file and flask app from the git repo.
+
+> #### Step 3
+> Created Docker image is pushing to docker hub.
+
 ---
 
 ## Overview
 
 In this demo, we will be provisioning the following :
 
-- Install packages: git, docker and its required dependencies to run the playbook on build server.
-- Clone the git repository to remote build server.
-- Build and push the image created image to DockerHub after login to the dockerHub.
+- Install packages: git, docker, and its required dependencies to run the playbook on the build server.
+- Clone the git repository to the remote build server.
+- Build and push the image-created image to DockerHub after login in to the docker hub.
 ---
 
 ## Requirements
@@ -102,7 +112,7 @@ Here we are installing packages to bulder server.
       register: git_status
 ```
 
-It will login to docker hub and build the image. After bulding the image will push to dockerhub. The below steps only run when there is any chnages in github repo.
+It will log in to the docker hub and build the image. After building the image will be pushed to the docker hub. The below steps only run when there are any changes in GitHub repo.
 ```yml
     - name: "Build - Login to remote Repository"
       when: git_status.changed == true
@@ -123,8 +133,8 @@ It will login to docker hub and build the image. After bulding the image will pu
         - "latest"
         - "{{ git_status.after }}"
 ```
-> Here git repo commited id used as image tag in docker hub
+> Here git repo committed id used as image tag in docker hub
 ---
 ## Result
-The docker hub will look like below after pushing image.
+The docker hub will look like this below after pushing the image.
 ![image](https://github.com/Jisjo/ansible_docker-build-and-push-to-dockerhub/blob/main/Diagram-ansible-2.png)
